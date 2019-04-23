@@ -1,0 +1,45 @@
+{
+  "name": "react-use-store",
+  "version": "1.0.0",
+  "description": "React use data is an local store to share data across components.",
+  "keywords": [
+    "React",
+    "hook",
+    "store"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "rimraf dist && NODE_ENV=prod webpack --progress --profile --bail",
+    "build:dev": "rimraf dist && webpack --progress --profile --bail"
+  },
+  "author": {
+    "name": "Ricky Jiao",
+    "email": "ricky.jiao86@gmail.com"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "files": [
+    "dist", 
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RickyJiao/react-use-data.git"
+  },
+  "peerDependencies": {
+    "react": "^16.8.4"
+  },
+  "dependencies": {
+    "react": "^16.8.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "babel-loader": "^8.0.4",
+    "babel-preset-env": "^1.5.1",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
+  }
+}
