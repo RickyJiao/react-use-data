@@ -6,7 +6,7 @@ const useDetail = ({
   defaultData
 }) => {
   const DEFALUT_ITEM = Object.freeze({
-    isFetching: true,
+    isFetching: false,
     detail: Object.freeze(defaultData)
   });
 
