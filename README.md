@@ -1,6 +1,6 @@
 # react-use-data
 
-React use data is an local store hook to share data across components. Redux is an centeral store, normally you only have one store for all entities data. It's suitable for large application. Sometimes, we don't really want the centeral large store. Rather, we want individual small store for different entities. That's why we have **react-use-data**, individual small store based on hooks.
+React use data is an local store hook to share data across components. Redux is an centeral store, normally there is only one store to represent entities data. It's suitable for large application. For some application, we don't really need large centeral store. Rather than, we prefer small individual store for different entities. That's why we created **react-use-data**, individual small store based on react hooks.
 
 ## Installation
 
@@ -17,6 +17,45 @@ $ yarn add react-use-data
 ```
 
 ## Example
+
+Use `useDetail` to create your `blog detail` entity store
+
+```js
+import { useDetail } from 'react-use-data';
+
+export default useDetail({
+  fetchData: (uuid) => {
+    return axios.get(`/blog/${uuid}`);
+  }
+});
+```
+
+Use `useBlogDetail.jsx` in your react component to retrieve data:
+
+```js
+import React, { useCallback, useMemo } from 'react';
+import useBlogDetail from './useBlogDetail';
+
+export default function BlogListPage() {
+  const blogUuid = 'uuid';
+  const { isFetching, detail } = useBlogDetail(blogUuid);
+
+  return (
+    <div>
+      {isFetching && (
+        <span>Loading...</span>
+      )}
+      <div>
+        {detail && (
+          detail.title
+        )}
+      </div>
+    </div>
+  );
+};
+```
+
+Note: the data is shared across different components which means the fetchData is only called **one time** for one entity item. The responsed entity item is cached in local samll individual store.
 
 Create your own your `blog list` entity store `useBlogList.jsx`
 
@@ -82,43 +121,6 @@ export default function BlogListPage() {
 ```
 
 The server response should return pagination information in `meta` property.
-
-Use `useDetail` to create your `blog detail` entity store
-
-```js
-import { useDetail } from 'react-use-data';
-
-export default useDetail({
-  fetchData: (uuid) => {
-    return axios.get(`/blog/${uuid}`);
-  }
-});
-```
-
-Use `useBlogDetail.jsx` in your react component to retrieve data:
-
-```js
-import React, { useCallback, useMemo } from 'react';
-import useBlogDetail from './useBlogDetail';
-
-export default function BlogListPage() {
-  const blogUuid = 'uuid';
-  const { isFetching, detail } = useBlogDetail(blogUuid);
-
-  return (
-    <div>
-      {isFetching && (
-        <span>Loading...</span>
-      )}
-      <div>
-        {detail && (
-          detail.title
-        )}
-      </div>
-    </div>
-  );
-};
-```
 
 ## Server Side Rendering
 
