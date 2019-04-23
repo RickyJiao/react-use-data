@@ -120,7 +120,7 @@ export default function BlogListPage() {
 };
 ```
 
-## Server side render
+## Server Side Rendering
 
 Use intialState to setup detail entity state
 ```js
