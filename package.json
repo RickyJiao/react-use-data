@@ -1,7 +1,7 @@
 {
-  "name": "react-use-store",
-  "version": "1.0.0",
-  "description": "React use data is an local store to share data across components.",
+  "name": "react-use-data",
+  "version": "1.0.1",
+  "description": "React use data is an local store to share data across components based on hooks",
   "keywords": [
     "React",
     "hook",
