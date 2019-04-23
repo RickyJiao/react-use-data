@@ -15,7 +15,7 @@ const useList = ({
   });
 
   const DEFALUT_DATA_ITEM = Object.freeze({
-    isFetching: true,
+    isFetching: false,
     meta: DEFAULT_META,
     data: Object.freeze(defaultData)
   });

@@ -55,6 +55,19 @@ export default function BlogListPage() {
 };
 ```
 
+
+Use `useDetail` to create your `search hook` entity store
+
+```js
+import { useDetail } from 'react-use-data';
+
+export default useDetail({
+  fetchData: (keyword) => {
+    return axios.get(`/search/${keyword}`);
+  }
+});
+```
+
 Note: the data is shared across different components which means the fetchData is only called **one time** for one entity item. The responsed entity item is cached in local samll individual store.
 
 Create your own your `blog list` entity store `useBlogList.jsx`
@@ -121,6 +134,7 @@ export default function BlogListPage() {
 ```
 
 The server response should return pagination information in `meta` property.
+
 
 ## Server Side Rendering
 
