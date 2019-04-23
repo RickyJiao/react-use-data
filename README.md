@@ -1,6 +1,6 @@
 # react-use-data
 
-React use data is an local store to share data across components. Redux is an centeral store, normally you only have one store to store all entities data. It's sutiable for large application. Sometimes, we don't really want the centeral large store. Rather, we want individual small store for different entities. That's why we have **react-use-data**.
+React use data is an local store to share data across components. Redux is an centeral store, normally you only have one store for all entities data. It's sutiable for large application. Sometimes, we don't really want the centeral large store. Rather, we want individual small store for different entities. That's why we have **react-use-data**.
 
 ## Installation
 
