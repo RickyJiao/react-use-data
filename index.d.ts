@@ -41,11 +41,11 @@ export interface ListResponse {
 export interface ListRequest {
   page: number;
   pageSize: number;
-  context: string | null;
+  context: any;
 }
 
 export interface useDetailParams {
-  fetchData: (context: string) => Promise<DetailResponse>;
+  fetchData: (context: any) => Promise<DetailResponse>;
   initalState: any;
   defaultData: any;
 }
