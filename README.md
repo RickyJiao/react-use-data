@@ -18,7 +18,7 @@ $ yarn add react-use-data
 
 ## Example
 
-Note: the data is shared across different components which means the `fetchData` is only called **one time** for one entity item. The responsed is cached in local samll individual store.
+Note: the data is shared across different components which means the `fetchData` is only called **one time** for one entity item. The response is cached in local small individual store.
 
 Use `useDetail` to create your `blog detail` entity store
 
