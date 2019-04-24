@@ -12,7 +12,8 @@ const useDetail = ({
 
   const DATA = initalState || {};
 
-  return (uuid) => {
+  return (context) => {
+    const uuid = JSON.stringify(context);
     const item = DATA[uuid] || DEFALUT_ITEM;
     const [isFetching, setFetching] = useState(item.isFetching);
     const [detail, setDetail] = useState(item.detail);
@@ -21,7 +22,7 @@ const useDetail = ({
       if (uuid && !DATA[uuid]) {
         setFetching(true);
 
-        fetchData(uuid).then((result) => {
+        fetchData(context).then((result) => {
           const { data } = result;
 
           DATA[uuid] = {

@@ -23,7 +23,8 @@ const useList = ({
   const DATA = initalState || {};
 
   return (context) => {
-    const item = DATA[context] || DEFALUT_DATA_ITEM;
+    const uuid = JSON.stringify(context);
+    const item = DATA[uuid] || DEFALUT_DATA_ITEM;
     const [meta, setMeta] = useState(item.meta);
     const [data, setData] = useState(item.data);
     const [isFetching, setFetching] = useState(item.isFetching);
@@ -46,13 +47,13 @@ const useList = ({
         context
       }).then((result) => {
         const { meta, data } = result;
-        const item = DATA[context];
+        const item = DATA[uuid];
         const datas = [
           ...(item ? item.data : []),
           ...data
         ];
 
-        DATA[context] = {
+        DATA[uuid] = {
           isFetching: false,
           meta,
           data: datas
@@ -62,7 +63,7 @@ const useList = ({
         setMeta(meta);
         setData(datas);
       });
-    }, [context]);
+    }, [uuid]);
 
     const loadMore = useCallback(() => {
       if (hasMore) {
@@ -73,12 +74,14 @@ const useList = ({
     }, [meta, hasMore]);
 
     useEffect(() => {
-      const item = DATA[context] || DEFALUT_DATA_ITEM;
+      const item = DATA[uuid] || DEFALUT_DATA_ITEM;
 
-      setMeta(item.meta);
-      setData(item.data);
-      setFetching(item.isFetching);
-    }, [context]);
+      if (item.data !== data) {
+        setMeta(item.meta);
+        setData(item.data);
+        setFetching(item.isFetching);
+      }
+    }, [uuid]);
 
     return {
       isFetching,

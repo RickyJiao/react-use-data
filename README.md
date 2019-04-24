@@ -18,6 +18,8 @@ $ yarn add react-use-data
 
 ## Example
 
+Note: the data is shared across different components which means the `fetchData` is only called **one time** for one entity item. The responsed is cached in local samll individual store.
+
 Use `useDetail` to create your `blog detail` entity store
 
 ```js
@@ -67,8 +69,6 @@ export default useDetail({
   }
 });
 ```
-
-Note: the data is shared across different components which means the fetchData is only called **one time** for one entity item. The responsed entity item is cached in local samll individual store.
 
 Create your own your `blog list` entity store `useBlogList.jsx`
 
@@ -145,7 +145,8 @@ Use intialState to setup detail entity state
   export default useDetail({
     fetchData,
     initalState: {
-      'uuid-1': {...}
+      'uuid1': {...},
+      'uuid2': {...}
     }
   });
 
