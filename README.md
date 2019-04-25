@@ -20,47 +20,14 @@ $ yarn add react-use-data
 
 Note: the data is shared across different components which means the `fetchData` is only called **one time** for one entity item. The responsed is cached in local samll individual store.
 
-Use `useDetail` to create your `blog detail` entity store
+### useDetail
 
-```js
-import { useDetail } from 'react-use-data';
-
-export default useDetail({
-  fetchData: (uuid) => {
-    return axios.get(`/blog/${uuid}`);
-  }
-});
-```
-
-Use `useBlogDetail.jsx` in your react component to retrieve data:
-
-```js
-import React, { useCallback, useMemo } from 'react';
-import useBlogDetail from './useBlogDetail';
-
-export default function BlogListPage() {
-  const blogUuid = 'uuid';
-  const { isFetching, detail } = useBlogDetail(blogUuid);
-
-  return (
-    <div>
-      {isFetching && (
-        <span>Loading...</span>
-      )}
-      <div>
-        {detail && (
-          detail.title
-        )}
-      </div>
-    </div>
-  );
-};
-```
-
+`useDetail` is an interface to create a store to store entity item based on entity **uuid**. For example, you have a search box, the search items are based on search keyword. It is suitable to use `useDetail` to cache **search items** based on **search keyword**. 
 
 Use `useDetail` to create your `search hook` entity store
 
 ```js
+// useSearch.jsx
 import { useDetail } from 'react-use-data';
 
 export default useDetail({
@@ -68,14 +35,57 @@ export default useDetail({
     return axios.get(`/search/${keyword}`);
   }
 });
+
+// SearchBox.jsx
+import React, { useState } from 'react';
+import useSearch from './useSearch';
+
+export default function SearchBox() {
+  const [keyword, setKeyword] = useState('');
+  const handleChange = useCallback((e) => {
+    const { value: keyword } = e.target;
+
+    setKeyword(keyword);
+  }, []);
+  const { isFetching, detail: searchResults } = useSearch(keyword);
+
+  return (
+    <div>
+      {isFetching && (
+        <span>Loading...</span>
+      )}
+      <div>
+        {searchResults && (
+          <ul>
+            {
+              searchResults.map(item => (
+                <p>{item.title}</p>
+              ))
+            }
+          </ul>
+        )}
+      </div>
+      <div>
+        <label>Search: </label>
+        <input type="text" value={keyword} onChange={handleChange} />
+      </div>
+    </div>
+  );
+};
 ```
+
+### useList
+
+`useList` is an interface to create a store for **pagination items**. For example, you have a blog list page to list all blogs, those blogs are list page by page. Once the page scorlls to bottom, call **loadMore** to show another pages. This is suitable to use `useList` to paginate blogs. 
 
 Create your own your `blog list` entity store `useBlogList.jsx`
 
 ```js
+// useBlogList
 import { useList } from 'react-use-data';
 
 export default useList({
+  pageSize: 8,
   fetchData: ({
     page,
     pageSize,
@@ -97,15 +107,10 @@ export default useList({
         }
       }
     });
-  },
-  pageSize: 8
+  }
 });
 
-```
-
-Use `useBlogList.jsx` in your react component to retrieve data:
-
-```js
+// BlogListPage
 import React, { useCallback, useMemo } from 'react';
 import useBlogList from './useBlogList';
 
