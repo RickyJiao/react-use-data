@@ -19,7 +19,7 @@ const useDetail = ({
     const [detail, setDetail] = useState(item.detail);
 
     useEffect(() => {
-      if (uuid && !DATA[uuid]) {
+      if (!DATA[uuid]) {
         setFetching(true);
 
         fetchData(context).then((result) => {
