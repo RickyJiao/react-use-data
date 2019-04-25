@@ -37,7 +37,7 @@ export default useDetail({
 });
 
 // SearchBox.jsx
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import useSearch from './useSearch';
 
 export default function SearchBox() {
@@ -111,7 +111,7 @@ export default useList({
 });
 
 // BlogListPage
-import React, { useCallback, useMemo } from 'react';
+import React from 'react';
 import useBlogList from './useBlogList';
 
 export default function BlogListPage() {
