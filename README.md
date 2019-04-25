@@ -1,6 +1,6 @@
 # react-use-data
 
-React use data is an local store hook to share data across components. Redux is an centeral store, normally there is only one store to represent entities data. It's suitable for large application. For some application, we don't really need large centeral store. Rather than, we prefer small individual store for different entities. That's why we created **react-use-data**, individual small store based on react hooks.
+React use data is an local store hook to share data across components. Redux is an centeral store, normally there is only one store to represent entities data. It's suitable for large application. For some application, we don't really need large centeral store. Rather than, we prefer small individual store for different entities. That's why we created **react-use-data**, small individual store based on react hooks.
 
 ## Installation
 
@@ -18,7 +18,7 @@ $ yarn add react-use-data
 
 ## Example
 
-Note: the data is shared across different components which means the `fetchData` is only called **one time** for one entity item. The response is cached in local small individual store.
+Note: the data is shared across different components which means the `fetchData` is only called **one time** for one entity item. The response is cached in local store.
 
 ### useDetail
 
