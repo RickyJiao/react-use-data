@@ -1,8 +1,8 @@
 export as namespace ReactUseData;
 
-export function useDetail(option: useDetailParams): useDetailHook;
+export function useDetail(option: UseDetailParams): useDetailHook;
 
-export function useList(option: useListParams): useListHook;
+export function useList(option: UseListParams): useListHook;
 
 declare type useDetailHook = (name: string) => UseDetailHook;
 
@@ -44,13 +44,14 @@ export interface ListRequest {
   context: any;
 }
 
-export interface useDetailParams {
+export interface UseDetailParams {
   fetchData: (context: any) => Promise<DetailResponse>;
   initalState: any;
   defaultData: any;
+  eanbleEmptyRequest: boolean;
 }
 
-export interface useListParams {
+export interface UseListParams {
   fetchData: (option: ListRequest) => Promise<ListResponse>;
   initalState: any;
   defaultData: any;

@@ -4,8 +4,8 @@ import {
 
 const useList = ({
   fetchData,
-  initalState,
   defaultData,
+  initalState = {},
   pageSize = 8
 }) => {
   const DEFAULT_META = Object.freeze({
@@ -20,7 +20,7 @@ const useList = ({
     data: Object.freeze(defaultData)
   });
 
-  const DATA = initalState || {};
+  const DATA = initalState;
 
   return (context) => {
     const uuid = JSON.stringify(context);
