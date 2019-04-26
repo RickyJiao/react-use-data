@@ -2,15 +2,16 @@ import { useEffect, useState } from 'react';
 
 const useDetail = ({
   fetchData,
-  initalState,
-  defaultData
+  defaultData,
+  initalState = {},
+  eanbleEmptyRequest = true
 }) => {
   const DEFALUT_ITEM = Object.freeze({
     isFetching: false,
     detail: Object.freeze(defaultData)
   });
 
-  const DATA = initalState || {};
+  const DATA = initalState;
 
   return (context) => {
     const uuid = JSON.stringify(context);
@@ -19,6 +20,10 @@ const useDetail = ({
     const [detail, setDetail] = useState(item.detail);
 
     useEffect(() => {
+      if (!eanbleEmptyRequest && !context) {
+        return;
+      }
+
       if (!DATA[uuid]) {
         setFetching(true);
 
