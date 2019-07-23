@@ -1,9 +1,3 @@
-export as namespace ReactUseData;
-
-export function useDetail(option: UseDetailParams): useDetailHook;
-
-export function useList(option: UseListParams): useListHook;
-
 declare type useDetailHook = (name: string) => UseDetailHook;
 
 declare type useListHook = (name: string) => UseListHook;
@@ -21,7 +15,6 @@ export interface UseListHook {
   hasMore: boolean;
   loadMore: () => void;
 }
-
 
 export interface DetailResponse {
   data: any;

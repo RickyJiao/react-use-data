@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 
+import { UseDetailParams } from '../typing/index';
+
 const useDetail = ({
   fetchData,
   defaultData,
   initalState = {},
   eanbleEmptyRequest = true
-}) => {
+}: UseDetailParams) => {
   const DEFALUT_ITEM = Object.freeze({
     isFetching: false,
     detail: Object.freeze(defaultData)

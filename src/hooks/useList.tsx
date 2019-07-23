@@ -1,13 +1,12 @@
-import {
-  useCallback, useMemo, useState, useEffect
-} from 'react';
+import { useCallback, useMemo, useState, useEffect } from 'react';
+import { UseListParams } from '../typing/index';
 
 const useList = ({
   fetchData,
   defaultData,
   initalState = {},
   pageSize = 8
-}) => {
+}: UseListParams) => {
   const DEFAULT_META = Object.freeze({
     page: -1,
     pageSize,
