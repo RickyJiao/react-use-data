@@ -9,7 +9,6 @@ export interface UseDetailHook {
 }
 
 export interface UseListHook {
-  detail: any;
   isFetching: boolean;
   data: Array<any>;
   meta: ListMeta;

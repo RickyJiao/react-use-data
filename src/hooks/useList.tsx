@@ -21,7 +21,7 @@ const useList: useListFn = ({
 
   const DATA = initalState;
 
-  return (context) => {
+  return context => {
     const uuid = JSON.stringify(context);
     const item = DATA[uuid] || DEFALUT_DATA_ITEM;
     const [meta, setMeta] = useState(item.meta);
