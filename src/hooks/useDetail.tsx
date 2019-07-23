@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
+import { UseDetailParams, useDetailFn } from '../typing/index';
 
-import { UseDetailParams } from '../typing/index';
-
-const useDetail = ({
+const useDetail: useDetailFn = ({
   fetchData,
   defaultData,
   initalState = {},
@@ -15,7 +14,7 @@ const useDetail = ({
 
   const DATA = initalState;
 
-  return (context) => {
+  return context => {
     const uuid = JSON.stringify(context);
     const item = DATA[uuid] || DEFALUT_ITEM;
     const [isFetching, setFetching] = useState(item.isFetching);

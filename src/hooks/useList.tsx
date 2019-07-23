@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState, useEffect } from 'react';
-import { UseListParams } from '../typing/index';
+import { UseListParams, useListFn } from '../typing/index';
 
-const useList = ({
+const useList: useListFn = ({
   fetchData,
   defaultData,
   initalState = {},

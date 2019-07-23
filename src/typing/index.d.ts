@@ -1,6 +1,7 @@
 declare type useDetailHook = (name: string) => UseDetailHook;
-
 declare type useListHook = (name: string) => UseListHook;
+declare type useDetailFn = (options: UseDetailParams) => useDetailHook;
+declare type useListFn = (options: UseListParams) => useListHook;
 
 export interface UseDetailHook {
   detail: any;
