@@ -1,32 +1,75 @@
 import { useCallback, useMemo, useState, useEffect } from 'react';
-import { UseListParams, useListFn } from '../typing/index';
 
-const useList: useListFn = ({
+interface UseListHook<T> {
+  isFetching: boolean;
+  data: T[];
+  meta: ListMeta;
+  hasMore: boolean;
+  loadMore: () => void;
+}
+
+interface ListMeta {
+  page: number;
+  pageSize: number;
+  totalPage: number;
+}
+
+interface ListItem<T> {
+  isFetching: boolean;
+  meta: ListMeta;
+  data: T[]
+}
+
+interface ListState<T> {
+  [key: string]: ListItem<T>
+}
+
+interface ListResponse<T> {
+  meta: ListMeta;
+  data: T[]
+}
+
+interface ListRequest {
+  page: number;
+  pageSize: number;
+  context: any;
+}
+
+interface UseListParams<T> {
+  fetchData: (option: ListRequest) => Promise<ListResponse<T>>;
+  initialState: ListState<T>;
+  defaultData: T[];
+  pageSize: number;
+}
+
+type useListHook<T, S> = (name: S) => UseListHook<T>;
+
+export default function useList<T, S>({
   fetchData,
   defaultData,
-  initalState = {},
+  initialState = {},
   pageSize = 8
-}: UseListParams) => {
-  const DEFAULT_META = Object.freeze({
+}: UseListParams<T>): useListHook<T, S> {
+  const DEFAULT_META: ListMeta = Object.freeze({
     page: -1,
     pageSize,
     totalPage: null,
   });
 
-  const DEFALUT_DATA_ITEM = Object.freeze({
+  const DEFAULT_DATA_ITEM: ListItem<T> = Object.freeze({
     isFetching: false,
     meta: DEFAULT_META,
-    data: Object.freeze(defaultData)
+    data: Object.freeze(defaultData) as T[]
   });
 
-  const DATA = initalState;
+  const DATA: ListState<T> = initialState;
 
   return context => {
-    const uuid = JSON.stringify(context);
-    const item = DATA[uuid] || DEFALUT_DATA_ITEM;
-    const [meta, setMeta] = useState(item.meta);
-    const [data, setData] = useState(item.data);
-    const [isFetching, setFetching] = useState(item.isFetching);
+    const uuid: string = JSON.stringify(context);
+    const item: ListItem<T> = DATA[uuid] || DEFAULT_DATA_ITEM;
+    const [meta, setMeta] = useState<ListMeta>(item.meta);
+    const [data, setData] = useState<T[]>(item.data);
+    const [isFetching, setFetching] = useState<boolean>(item.isFetching);
 
     const hasMore = useMemo(() => {
       const { page, totalPage } = meta;
@@ -44,23 +87,23 @@ const useList: useListFn = ({
         page,
         pageSize,
         context
-      }).then((result) => {
-        const { meta, data } = result;
+      }).then((result: ListResponse<T>) => {
+        const { meta, data: previousData } = result;
         const item = DATA[uuid];
-        const datas = [
+        const data: T[] = [
           ...(item ? item.data : []),
-          ...data
+          ...previousData
         ];
 
         DATA[uuid] = {
           isFetching: false,
           meta,
-          data: datas
+          data
         };
 
         setFetching(false);
         setMeta(meta);
-        setData(datas);
+        setData(data);
       });
     }, [uuid]);
 
@@ -73,7 +116,7 @@ const useList: useListFn = ({
     }, [meta, hasMore]);
 
     useEffect(() => {
-      const item = DATA[uuid] || DEFALUT_DATA_ITEM;
+      const item = DATA[uuid] || DEFAULT_DATA_ITEM;
 
       if (item.data !== data) {
         setMeta(item.meta);
@@ -90,6 +133,4 @@ const useList: useListFn = ({
       loadMore
     };
   };
-};
-
-export default useList;
+};;

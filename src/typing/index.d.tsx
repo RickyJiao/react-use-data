@@ -1,7 +1,9 @@
 declare type useDetailHook = (name: string) => UseDetailHook;
 declare type useListHook = (name: string) => UseListHook;
-declare type useDetailFn = (options: UseDetailParams) => useDetailHook;
-declare type useListFn = (options: UseListParams) => useListHook;
+
+export type useDetailFn = (options: UseDetailParams) => useDetailHook;
+
+export type useListFn = (options: UseListParams) => useListHook;
 
 export interface UseDetailHook {
   detail: any;
@@ -39,14 +41,14 @@ export interface ListRequest {
 
 export interface UseDetailParams {
   fetchData: (context: any) => Promise<DetailResponse>;
-  initalState: any;
+  initialState: any;
   defaultData: any;
-  eanbleEmptyRequest: boolean;
+  enableEmptyRequest: boolean;
 }
 
 export interface UseListParams {
   fetchData: (option: ListRequest) => Promise<ListResponse>;
-  initalState: any;
+  initialState: any;
   defaultData: any;
   pageSize: number;
 }

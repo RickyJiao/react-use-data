@@ -1,27 +1,27 @@
 import { useEffect, useState } from 'react';
-import { UseDetailParams, useDetailFn } from '../typing/index';
+import { UseDetailParams, useDetailFn } from '../typing/index.d';
 
 const useDetail: useDetailFn = ({
   fetchData,
   defaultData,
-  initalState = {},
-  eanbleEmptyRequest = true
+  initialState = {},
+  enableEmptyRequest = true
 }: UseDetailParams) => {
-  const DEFALUT_ITEM = Object.freeze({
+  const DEFAULT_ITEM = Object.freeze({
     isFetching: false,
     detail: Object.freeze(defaultData)
   });
 
-  const DATA = initalState;
+  const DATA = initialState;
 
   return context => {
     const uuid = JSON.stringify(context);
-    const item = DATA[uuid] || DEFALUT_ITEM;
+    const item = DATA[uuid] || DEFAULT_ITEM;
     const [isFetching, setFetching] = useState(item.isFetching);
     const [detail, setDetail] = useState(item.detail);
 
     useEffect(() => {
-      if (!eanbleEmptyRequest && !context) {
+      if (!enableEmptyRequest && !context) {
         return;
       }
 

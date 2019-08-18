@@ -12,8 +12,10 @@
     "removeComments": true,
     "allowSyntheticDefaultImports": false,
     "jsx": "react",
-    "allowJs": true,
-    "baseUrl": "./",
+    "allowJs": false,
+    "baseUrl": "./src",
+    "declaration": true,
+    "declarationDir": "./dist/types",
     "paths": {
       "*": [
         "*",
@@ -23,7 +25,8 @@
     // "rootDirs": [],                        /* List of root folders whose combined content represents the structure of the project at runtime. */
     "typeRoots": [
       "./node_modules/@types",
-      "./src/typings"
-    ],  
+      "./src/typings",
+      "./src/index.d.tsx"
+    ]
   }
 }
