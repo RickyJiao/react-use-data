@@ -8,12 +8,6 @@ interface UseListHook<T> {
   loadMore: () => void;
 }
 
-interface ListMeta {
-  page: number;
-  pageSize: number;
-  totalPage: number;
-}
-
 interface ListItem<T> {
   isFetching: boolean;
   meta: ListMeta;
@@ -24,19 +18,25 @@ interface ListState<T> {
   [key: string]: ListItem<T>
 }
 
-interface ListResponse<T> {
+export interface ListMeta {
+  page: number;
+  pageSize: number;
+  totalPage: number;
+}
+
+export interface ListResponse<T> {
   meta: ListMeta;
   data: T[]
 }
 
-interface ListRequest {
+export interface ListRequest<S> {
   page: number;
   pageSize: number;
-  context: any;
+  context: S;
 }
 
-interface UseListParams<T> {
-  fetchData: (option: ListRequest) => Promise<ListResponse<T>>;
+interface UseListParams<T, S> {
+  fetchData: (option: ListRequest<S>) => Promise<ListResponse<T>>;
   defaultData?: T[];
   initialState?: ListState<T>;
   pageSize?: number;
@@ -49,7 +49,7 @@ export default function useList<T, S>({
   defaultData = [],
   initialState = {},
   pageSize = 8
-}: UseListParams<T>): useListHook<T, S> {
+}: UseListParams<T, S>): useListHook<T, S> {
   const DEFAULT_META: ListMeta = Object.freeze({
     page: -1,
     pageSize,

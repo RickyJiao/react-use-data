@@ -5,10 +5,6 @@ interface UseDetailHook<T> {
   isFetching: boolean;
 }
 
-interface DetailResponse<T> {
-  data: T;
-}
-
 interface DetailItem<T> {
   isFetching: boolean;
   detail: Readonly<T>
@@ -16,6 +12,10 @@ interface DetailItem<T> {
 
 interface DetailState<T> {
   [key: string]: DetailItem<T>
+}
+
+export interface DetailResponse<T> {
+  data: T;
 }
 
 interface UseDetailParams<T, S> {
