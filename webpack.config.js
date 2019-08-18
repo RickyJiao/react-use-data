@@ -9,7 +9,7 @@ module.exports = {
   mode: isProd ? 'production' : 'development',
 
   entry: {
-    app: './src/index.jsx'
+    app: './src/index.tsx'
   },
 
   output: {
@@ -20,15 +20,15 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx', '.ts', '.tsx']
   },
 
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        loader: 'awesome-typescript-loader'
       }
     ]
   },
