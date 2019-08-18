@@ -1,6 +1,6 @@
 {
   "name": "react-use-data",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "React use data is an local store to share data across components based on hooks",
   "keywords": [
     "React",
@@ -28,9 +28,6 @@
     "url": "https://github.com/RickyJiao/react-use-data.git"
   },
   "peerDependencies": {
-    "react": "^16.8.4"
-  },
-  "dependencies": {
     "react": "^16.8.6"
   },
   "devDependencies": {
@@ -41,9 +38,10 @@
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "@types/react": "^16.8.23",
+    "awesome-typescript-loader": "^5.2.1",
+    "react": "^16.8.6",
     "tslint": "^5.18.0",
     "tslint-loader": "^3.5.4",
-    "awesome-typescript-loader": "^5.2.1",
     "typescript": "^3.5.3",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3"
