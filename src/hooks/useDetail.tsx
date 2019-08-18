@@ -1,24 +1,50 @@
 import { useEffect, useState } from 'react';
-import { UseDetailParams, useDetailFn } from '../typing/index.d';
 
-const useDetail: useDetailFn = ({
+interface UseDetailHook<T> {
+  detail: T;
+  isFetching: boolean;
+}
+
+interface DetailResponse<T> {
+  data: T;
+}
+
+interface DetailItem<T> {
+  isFetching: boolean;
+  detail: Readonly<T>
+}
+
+interface DetailState<T> {
+  [key: string]: DetailItem<T>
+}
+
+interface UseDetailParams<T, S> {
+  fetchData: (context: S) => Promise<DetailResponse<T>>;
+  initialState: DetailState<T>;
+  defaultData: T;
+  enableEmptyRequest: boolean;
+}
+
+type useDetailHook<T, S> = (name: S) => UseDetailHook<T>;
+
+export default function useDetail<T, S>({
   fetchData,
   defaultData,
   initialState = {},
   enableEmptyRequest = true
-}: UseDetailParams) => {
-  const DEFAULT_ITEM = Object.freeze({
+}: UseDetailParams<T, S>): useDetailHook<T, S> {
+  const DEFAULT_ITEM: DetailItem<T> = Object.freeze({
     isFetching: false,
     detail: Object.freeze(defaultData)
   });
 
-  const DATA = initialState;
+  const DATA: DetailState<T> = initialState;
 
   return context => {
-    const uuid = JSON.stringify(context);
-    const item = DATA[uuid] || DEFAULT_ITEM;
-    const [isFetching, setFetching] = useState(item.isFetching);
-    const [detail, setDetail] = useState(item.detail);
+    const uuid: string = JSON.stringify(context);
+    const item: DetailItem<T> = DATA[uuid] || DEFAULT_ITEM;
+    const [isFetching, setFetching] = useState<boolean>(item.isFetching);
+    const [detail, setDetail] = useState<T>(item.detail);
 
     useEffect(() => {
       if (!enableEmptyRequest && !context) {
@@ -48,5 +74,3 @@ const useDetail: useDetailFn = ({
     };
   };
 };
-
-export default useDetail;
