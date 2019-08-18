@@ -1,6 +1,6 @@
 {
   "name": "react-use-data",
-  "version": "1.0.12",
+  "version": "1.0.15",
   "description": "React use data is an local store to share data across components based on hooks",
   "keywords": [
     "React",
@@ -18,7 +18,7 @@
   },
   "main": "dist/index.js",
   "module": "dist/index.js",
-  "types": "dist/types/index.d.ts",
+  "types": "dist/index.d.ts",
   "files": [
     "dist",
     "README.md"
