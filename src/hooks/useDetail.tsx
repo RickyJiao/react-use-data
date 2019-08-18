@@ -20,9 +20,9 @@ interface DetailState<T> {
 
 interface UseDetailParams<T, S> {
   fetchData: (context: S) => Promise<DetailResponse<T>>;
-  initialState: DetailState<T>;
-  defaultData: T;
-  enableEmptyRequest: boolean;
+  defaultData?: T;
+  initialState?: DetailState<T>;
+  enableEmptyRequest?: boolean;
 }
 
 type useDetailHook<T, S> = (name: S) => UseDetailHook<T>;

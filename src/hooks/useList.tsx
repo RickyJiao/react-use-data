@@ -37,16 +37,16 @@ interface ListRequest {
 
 interface UseListParams<T> {
   fetchData: (option: ListRequest) => Promise<ListResponse<T>>;
-  initialState: ListState<T>;
-  defaultData: T[];
-  pageSize: number;
+  defaultData?: T[];
+  initialState?: ListState<T>;
+  pageSize?: number;
 }
 
 type useListHook<T, S> = (name: S) => UseListHook<T>;
 
 export default function useList<T, S>({
   fetchData,
-  defaultData,
+  defaultData = [],
   initialState = {},
   pageSize = 8
 }: UseListParams<T>): useListHook<T, S> {
