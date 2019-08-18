@@ -18,10 +18,9 @@
   },
   "main": "dist/index.js",
   "module": "dist/index.js",
-  "types": "index.d.ts",
+  "types": "dist/types/index.d.ts",
   "files": [
     "dist",
-    "index.d.ts",
     "README.md"
   ],
   "repository": {
@@ -42,7 +41,6 @@
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "@types/react": "^16.8.23",
-    "@types/react-dom": "^16.8.4",
     "tslint": "^5.18.0",
     "tslint-loader": "^3.5.4",
     "awesome-typescript-loader": "^5.2.1",
